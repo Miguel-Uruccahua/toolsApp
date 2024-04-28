@@ -24,7 +24,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import com.applicationtls.tools.data.local.database.AppDatabase
-import com.applicationtls.tools.data.local.database.ToolsDao
+import com.applicationtls.tools.data.local.database.tools.ToolsDao
 import javax.inject.Singleton
 
 
