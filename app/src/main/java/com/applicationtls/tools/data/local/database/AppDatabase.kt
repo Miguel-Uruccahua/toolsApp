@@ -18,8 +18,10 @@ package com.applicationtls.tools.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.applicationtls.tools.data.local.database.tools.ToolsEntity
+import com.applicationtls.tools.data.local.database.tools.ToolsDao
 
-@Database(entities = [Tools::class], version = 1)
+@Database(entities = [ToolsEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun toolsDao(): ToolsDao
 }

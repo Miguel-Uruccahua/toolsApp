@@ -23,8 +23,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import com.applicationtls.tools.data.local.database.Tools
-import com.applicationtls.tools.data.local.database.ToolsDao
+import com.applicationtls.tools.data.local.database.tools.ToolsEntity
+import com.applicationtls.tools.data.local.database.tools.ToolsDao
 import com.applicationtls.tools.data.repository.DefaultToolsRepository
 
 /**
@@ -46,13 +46,13 @@ class DefaultToolsRepositoryTest {
 
 private class FakeToolsDao : ToolsDao {
 
-    private val data = mutableListOf<Tools>()
+    private val data = mutableListOf<ToolsEntity>()
 
-    override fun getToolss(): Flow<List<Tools>> = flow {
+    override fun getToolss(): Flow<List<ToolsEntity>> = flow {
         emit(data)
     }
 
-    override suspend fun insertTools(item: Tools) {
+    override suspend fun insertTools(item: ToolsEntity) {
         data.add(0, item)
     }
 }

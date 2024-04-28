@@ -18,8 +18,8 @@ package com.applicationtls.tools.data.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import com.applicationtls.tools.data.local.database.Tools
-import com.applicationtls.tools.data.local.database.ToolsDao
+import com.applicationtls.tools.data.local.database.tools.ToolsEntity
+import com.applicationtls.tools.data.local.database.tools.ToolsDao
 import javax.inject.Inject
 
 interface ToolsRepository {
@@ -35,6 +35,6 @@ class DefaultToolsRepository @Inject constructor(
         toolsDao.getToolss().map { items -> items.map { it.name } }
 
     override suspend fun add(name: String) {
-        toolsDao.insertTools(Tools(name = name))
+        toolsDao.insertTools(ToolsEntity(name = name))
     }
 }

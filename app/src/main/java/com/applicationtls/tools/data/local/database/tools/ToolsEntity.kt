@@ -14,28 +14,16 @@
  * limitations under the License.
  */
 
-package com.applicationtls.tools.data.local.database
+package com.applicationtls.tools.data.local.database.tools
 
-import androidx.room.Dao
 import androidx.room.Entity
-import androidx.room.Insert
 import androidx.room.PrimaryKey
-import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
 
 @Entity
-data class Tools(
+data class ToolsEntity(
     val name: String
 ) {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0
 }
 
-@Dao
-interface ToolsDao {
-    @Query("SELECT * FROM tools ORDER BY uid DESC LIMIT 10")
-    fun getToolss(): Flow<List<Tools>>
-
-    @Insert
-    suspend fun insertTools(item: Tools)
-}
