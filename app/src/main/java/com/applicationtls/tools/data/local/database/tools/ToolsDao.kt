@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ToolsDao {
-    @Query("SELECT * FROM tools ORDER BY uid DESC LIMIT 10")
+    @Query("SELECT * FROM toolsentity ORDER BY uid DESC LIMIT 10")
     fun getToolss(): Flow<List<ToolsEntity>>
 
     @Insert

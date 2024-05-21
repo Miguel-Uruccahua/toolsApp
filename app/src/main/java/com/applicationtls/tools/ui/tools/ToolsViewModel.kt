@@ -16,6 +16,8 @@
 
 package com.applicationtls.tools.ui.tools
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,6 +37,14 @@ import javax.inject.Inject
 class ToolsViewModel @Inject constructor(
     private val toolsRepository: ToolsRepository
 ) : ViewModel() {
+
+
+    
+    private val _estado = MutableLiveData<String>()
+    var estado : LiveData<String> = _estado
+    fun cambiarestado(){
+        _estado.value = "Hola"
+    }
 
     val uiState: StateFlow<ToolsUiState> = toolsRepository
         .toolss.map<List<String>, ToolsUiState>(::Success)

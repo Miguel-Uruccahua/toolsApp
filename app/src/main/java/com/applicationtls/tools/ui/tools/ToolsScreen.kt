@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -39,6 +40,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun ToolsScreen(modifier: Modifier = Modifier, viewModel: ToolsViewModel = hiltViewModel()) {
+    val estado by viewModel.estado.observeAsState(initial = "Nada")
+
     val items by viewModel.uiState.collectAsStateWithLifecycle()
     if (items is ToolsUiState.Success) {
         ToolsScreen(
@@ -58,7 +61,9 @@ internal fun ToolsScreen(
     Column(modifier) {
         var nameTools by remember { mutableStateOf("Compose") }
         Row(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 24.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             TextField(
