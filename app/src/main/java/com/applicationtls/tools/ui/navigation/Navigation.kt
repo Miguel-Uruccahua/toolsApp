@@ -16,23 +16,25 @@
 
 package com.applicationtls.tools.ui.navigation
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.applicationtls.tools.ui.qrscan.QrScanScreen
 import com.applicationtls.tools.ui.tools.ToolsScreen
 
 @Composable
-fun MainNavigation() {
-    val navController = rememberNavController()
+fun MainNavigation(navController:NavHostController) {
 
-    NavHost(navController = navController, startDestination = "main") {
-        composable("main") {
-            QrScanScreen()
+    NavHost(navController = navController, startDestination = QrScan) {
+        composable<QrScan> {
+            QrScanScreen(navController)
+        }
+        composable<Tools> {
+            ToolsScreen(navController)
         }
     }
+
 }
+
