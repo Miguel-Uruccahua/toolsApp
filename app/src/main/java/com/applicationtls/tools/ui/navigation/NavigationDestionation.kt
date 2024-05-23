@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 object QrScan
 
 @Serializable
-object Tools
+object Reminder
 
 @Serializable
 data class Menu(

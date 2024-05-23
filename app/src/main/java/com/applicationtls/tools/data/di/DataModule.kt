@@ -24,6 +24,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import com.applicationtls.tools.data.repository.ToolsRepository
 import com.applicationtls.tools.data.repository.DefaultToolsRepository
+import com.applicationtls.tools.data.repository.ReminderRepository
+import com.applicationtls.tools.data.repository.ReminderRepositoryImpl
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -36,14 +38,12 @@ interface DataModule {
     fun bindsToolsRepository(
         toolsRepository: DefaultToolsRepository
     ): ToolsRepository
+
+    @Singleton
+    @Binds
+    fun bindsReminderRepository(
+        reminderRepository: ReminderRepositoryImpl
+    ): ReminderRepository
+
 }
 
-class FakeToolsRepository @Inject constructor() : ToolsRepository {
-    override val toolss: Flow<List<String>> = flowOf(fakeToolss)
-
-    override suspend fun add(name: String) {
-        throw NotImplementedError()
-    }
-}
-
-val fakeToolss = listOf("One", "Two", "Three")

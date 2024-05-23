@@ -24,6 +24,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import com.applicationtls.tools.data.local.database.AppDatabase
+import com.applicationtls.tools.data.local.database.reminder.ReminderDao
 import com.applicationtls.tools.data.local.database.tools.ToolsDao
 import javax.inject.Singleton
 
@@ -34,6 +35,11 @@ class DatabaseModule {
     @Provides
     fun provideToolsDao(appDatabase: AppDatabase): ToolsDao {
         return appDatabase.toolsDao()
+    }
+
+    @Provides
+    fun provideReminderDao(appDatabase: AppDatabase): ReminderDao {
+        return appDatabase.reminderDao()
     }
 
     @Provides

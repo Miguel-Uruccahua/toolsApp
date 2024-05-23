@@ -29,15 +29,11 @@ fun TopBar() {
                 Button(onClick = {
                     navController.navigate(QrScan)
                     scope.launch { drawerState.close() }
-                }) {
-                    Text(text = "Navegar a QR")
-                }
+                }) { Text(text = "Lector QR") }
                 Button(onClick = {
-                    navController.navigate(Tools)
+                    navController.navigate(Reminder)
                     scope.launch { drawerState.close() }
-                }) {
-                    Text(text = "Navegar a Tools")
-                }
+                }) { Text(text = "Recordatorios") }
             }
         },
     ) {
@@ -52,16 +48,7 @@ fun TopBar() {
                     }
                 })
         }) { contentPadding ->
-
             MainNavigation(navController)
-            /*NavHost(navController = navController, startDestination = QrScan) {
-                composable<QrScan> {
-                    QrScanScreen(navController)
-                }
-                composable<Tools> {
-                    ToolsScreen(navController)
-                }
-            }*/
         }
     }
 }

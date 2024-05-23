@@ -116,6 +116,8 @@ dependencies {
     //serialization
     implementation(libs.kotlinx.serialization.json)
 
+    //QRScan
+    implementation(libs.zxing.android)
 
     // Compose
     implementation(libs.androidx.compose.ui)

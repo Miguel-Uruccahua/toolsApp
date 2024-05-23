@@ -17,12 +17,11 @@
 package com.applicationtls.tools.ui.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.applicationtls.tools.ui.qrscan.QrScanScreen
-import com.applicationtls.tools.ui.tools.ToolsScreen
+import com.applicationtls.tools.ui.reminder.ReminderScreen
 
 @Composable
 fun MainNavigation(navController:NavHostController) {
@@ -31,8 +30,8 @@ fun MainNavigation(navController:NavHostController) {
         composable<QrScan> {
             QrScanScreen(navController)
         }
-        composable<Tools> {
-            ToolsScreen(navController)
+        composable<Reminder> {
+            ReminderScreen(navController)
         }
     }
 
