@@ -14,23 +14,29 @@
  * limitations under the License.
  */
 
-package com.applicationtls.tools.ui
+package com.applicationtls.tools.ui.navigation
 
-import androidx.compose.foundation.layout.padding
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.applicationtls.tools.ui.tools.ToolsScreen
+import com.applicationtls.tools.ui.qrscan.QrScanScreen
+import com.applicationtls.tools.ui.reminder.ReminderScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MainNavigation() {
-    val navController = rememberNavController()
+fun MainNavigation(navController:NavHostController) {
 
-    NavHost(navController = navController, startDestination = "main") {
-        composable("main") { ToolsScreen(modifier = Modifier.padding(16.dp)) }
-        // TODO: Add more destinations
+    NavHost(navController = navController, startDestination = Reminder) {
+        composable<QrScan> {
+            QrScanScreen(navController)
+        }
+        composable<Reminder> {
+            ReminderScreen(navController)
+        }
     }
+
 }
+

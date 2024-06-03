@@ -21,6 +21,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt.gradle)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -101,6 +102,8 @@ dependencies {
     testImplementation(libs.hilt.android.testing)
     kaptTest(libs.hilt.android.compiler)
 
+    implementation(libs.androidx.livedata)
+
     // Arch Components
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
@@ -109,6 +112,12 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+
+    //serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    //QRScan
+    implementation(libs.zxing.android)
 
     // Compose
     implementation(libs.androidx.compose.ui)
