@@ -9,19 +9,32 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 interface ReminderRepository {
-    val reminderList: Flow<List<ReminderModel>>
     suspend fun add(reminder:ReminderModel)
+    suspend fun delete(reminder: ReminderModel)
+
+    suspend fun update(reminder: ReminderModel)
+    fun getData():Flow<List<ReminderModel>>
 }
 
 class ReminderRepositoryImpl @Inject constructor(
     private val reminderDao: ReminderDao,
 ) : ReminderRepository {
 
-    override val reminderList: Flow<List<ReminderModel>> =
-        reminderDao.getReminder().map { item -> item.map { it.asDomain()}
-        }
-
     override suspend fun add(reminder: ReminderModel) {
         reminderDao.insertRemind(reminder.asEntity())
     }
+
+    override suspend fun delete(reminder: ReminderModel) {
+        reminderDao.deleteRemind(reminder.asEntity())
+    }
+
+    override suspend fun update(reminder: ReminderModel) {
+        reminderDao.updateRemind(reminder.asEntity())
+    }
+
+    override fun getData(): Flow<List<ReminderModel>> {
+        return reminderDao.getData().map { items->items.map { it.asDomain() } }
+    }
+
+
 }

@@ -26,6 +26,11 @@ import androidx.lifecycle.viewModelScope
 import com.applicationtls.tools.data.repository.ReminderRepository
 import com.applicationtls.tools.ui.reminder.domain.ReminderModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.util.Date
@@ -52,15 +57,43 @@ class ReminderViewModel @Inject constructor(
                     time = LocalDateTime.now().toString(),
                     isDone = true
                 ))
+            }.onSuccess {
+                _data.value = ""
             }.onFailure {
                 Log.e("ReminderVM","Fallo al insertar en: $it")
             }
         }
     }
+
+    val listState:StateFlow<ReminderUiState> = reminderRepository.getData().map { ReminderUiState.Success(it) }
+        .catch { ReminderUiState.Error(it) }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000),ReminderUiState.Loading )
+
+
+    fun deleteReminder(reminderModel: ReminderModel){
+        viewModelScope.launch {
+            runCatching {
+                reminderRepository.delete(reminderModel)
+            }.onFailure {
+                Log.e("ReminderVM","Fallo al Eliminar en: $it")
+            }
+        }
+    }
+
+    fun updateReminder(reminderModel: ReminderModel){
+        viewModelScope.launch {
+            runCatching {
+                reminderRepository.update(reminderModel)
+            }.onFailure {
+                Log.e("ReminderVM","Fallo al Actualizar en: $it")
+            }
+        }
+    }
+
 }
 
 sealed interface ReminderUiState {
     object Loading : ReminderUiState
     data class Error(val throwable: Throwable) : ReminderUiState
-    data class Success(val data: List<String>) : ReminderUiState
+    data class Success(val data: List<ReminderModel>) : ReminderUiState
 }
